@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+
+
+/* Define light theme colors */
+:root {
+    --background: #FFFFFF; /* White */
+    --primary: #075E54; /* Deep Sea Green */
+    --secondary: #128C7E; /* Surfie Green */
+    --accent: #25D366; /* Mountain Meadow */
+    --text-primary: #000000; /* Black */
+    --text-secondary: #4F4F4F; /* Dark Gray */
+    --chat-background: #ECE5DD; /* Pearl Bush */
+    --incoming-message: #FFFFFF; /* White */
+    --outgoing-message: #DCF8C6; /* Gossip */
+  }
+  
+  /* Define dark theme colors */
+  [data-theme="dark"] {
+    --background: #0A1014; /* Darker Background */
+    --primary: #075E54; /* Deep Sea Green */
+    --secondary: #128C7E; /* Surfie Green */
+    --accent: #25D366; /* Mountain Meadow */
+    --text-primary: #E0E0E0; /* Light Gray */
+    --text-secondary: #B0B0B0; /* Medium Gray */
+    --chat-background: #1E1E1E; /* Dark Gray */
+    --incoming-message: #1A1A1A; /* Dark Gray */
+    --outgoing-message: #0D4D40; /* Dark Teal */
+  }
+  
+  /* Example usage */
+  /*  */
