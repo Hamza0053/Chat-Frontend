@@ -6,13 +6,13 @@ import Filters from "../../dropdowns/Filters";
 import AllContacts from "../contacts/AllContacts";
 
 
-function ChatHeader() {
+function ChatHeader({ isCalls = false }) {
     const [toggleFilter, setToggleFilter] = useState(false)
     const [showContacts, setAllContacts] = useState(false)
 
     return (
         <div className="p-4 flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Chats</h2>
+            <h2 className="text-xl font-semibold">{isCalls ? 'Calls' : 'Chats'}</h2>
             <div className="flex gap-2">
                 <Button
                     onClick={() => setAllContacts((prev) => prev ? false : true)}
@@ -21,13 +21,13 @@ function ChatHeader() {
                     <RxPencil2 className="text-[#54656f] cursor-pointer text-2xl" />
                 </Button>
                 <AllContacts setAllContacts={setAllContacts} showContacts={showContacts} />
-                <Button
+                {!isCalls && <Button
                     onClick={() => setToggleFilter((prev) => prev ? false : true)}
                     className="hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded"
                 >
                     <BsFilter className="text-[#54656f] cursor-pointer text-2xl" />
-                </Button>
-                <Filters toggleFilter={toggleFilter} />
+                </Button>}
+                {!isCalls && <Filters toggleFilter={toggleFilter} />}
             </div>
         </div>
     )

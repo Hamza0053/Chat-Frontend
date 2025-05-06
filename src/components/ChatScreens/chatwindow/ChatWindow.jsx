@@ -4,19 +4,19 @@ import Chatbox from "./Chatbox";
 import { useChat } from "../../../hooks/useAuth";
 import SelectChat from "./SelectChat";
 
-const ChatWindow = () => {
-
+const ChatWindow = ({initiateAudioCall}) => {
+    
     const {selectedChat} = useChat(); 
 
     return (
         <>
             {
                 selectedChat ?
-                    <Chatbox  />
+                    <Chatbox initiateAudioCall={initiateAudioCall} />
                     :
                     <SelectChat />
             }
-        </>
+        </> 
     );
 };
 

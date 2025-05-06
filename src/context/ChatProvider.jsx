@@ -4,9 +4,9 @@ import { ChatList, FetchMessages } from "../api/auth"
 import { CreateChatHandler } from "./messageHandler";
 import { useAuth } from "../hooks/useAuth";
 import useNotifications from "../hooks/useNotifications";
-
+import socket from "../socket";   
 // Set up Socket.IO client connection
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");/
 // Create the context
 
 
@@ -45,17 +45,18 @@ const ChatProvider = ({ children }) => {
     }
 
 
-    const sendMessage = async (messageContent, message_type = "text", isGroupChat = false) => {
+    const sendMessage = async (messageContent, filePath = null, message_type = "text", isGroupChat = false) => {
         const isNew = chatList.find(chat => chat?._id === selectedChat?._id)
         const chat = isNew ? selectedChat : await CreateChatHandler(user?._id, selectedChat?._id)
+        console.log('This is file Object: ', file);
 
         const newMessage = {
             sender: user?._id,
             message_content: messageContent,
-            message_type: file ? getMessageType(file.type) : "text",
+            message_type: file ? getMessageType(file.type) : message_type,
             timestamp: new Date().toLocaleTimeString(),
             chatId: chat?._id,
-            file: file
+            file: filePath
         };
         console.log('New Messages is sending', newMessage);
 
@@ -190,7 +191,7 @@ const ChatProvider = ({ children }) => {
 
 
     return (
-        <chatContext.Provider value={{ messages, chatList, setFile,file, fetchChatList, setSelectedChat, newChat, moveToStart, sendMessage, selectedChat, addNewContact }}>
+        <chatContext.Provider value={{ messages, chatList, setFile, file, fetchChatList, setSelectedChat, newChat, moveToStart, sendMessage, selectedChat, addNewContact }}>
             {children}
         </chatContext.Provider>
     );

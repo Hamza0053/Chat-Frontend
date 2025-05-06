@@ -8,6 +8,7 @@ import { useChat } from '../../hooks/useAuth';
 
 
 
+
 function SelectFiles({ showFileDropDropdown, SetShowFileDropDropdown }) {
     const { setFile , file } = useChat()
     const containerRef = useRef(null); // Reference for detecting outside clicks
@@ -17,19 +18,20 @@ function SelectFiles({ showFileDropDropdown, SetShowFileDropDropdown }) {
         const selectedFile = event.target.files[0];
         console.log('This is Selected Files ', event.target.files);
         if (selectedFile) {
-            const reader = new FileReader();
-            reader.readAsDataURL(selectedFile);
-            reader.onload = () => {
-                console.log('Read as Base64 String ', reader);
-                const base64Data = reader.result.split(",")[1]; // Extract Base64 part
-                console.log('base64Data', base64Data);
-                setFile({
-                    name: selectedFile.name,
-                    type: selectedFile.type,
-                    data: base64Data,
-                    preview: reader.result
-                });
-            };
+            setFile(selectedFile)
+            // const reader = new FileReader();
+            // reader.readAsDataURL(selectedFile);
+            // reader.onload = () => {
+            //     console.log('Read as Base64 String ', reader);
+            //     const base64Data = reader.result.split(",")[1]; 
+            //     console.log('base64Data', base64Data);
+            //     setFile({
+            //         name: selectedFile.name,
+            //         type: selectedFile.type,
+            //         data: base64Data,
+            //         preview: reader.result
+            //     });
+            // };
         }
     };
 

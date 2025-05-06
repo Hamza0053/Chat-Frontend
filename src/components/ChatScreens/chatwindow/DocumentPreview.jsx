@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineFilePdf } from "react-icons/ai";
 import { AiOutlineFileWord, AiOutlineFileExcel, AiOutlineFileText } from "react-icons/ai";
 
-function DocumentPreview({ fileUrl }) {
+export function DocumentPreview({ fileUrl }) {
     const [fileSize, setFileSize] = useState("");
-    const fileName = fileUrl.split("/").pop();
-    const fileExtension = fileName.split(".").pop().toLowerCase();
+    const fileName = fileUrl
+    const fileExtension = fileName
 
     // Fetch file size
     useEffect(() => {
@@ -37,7 +37,7 @@ function DocumentPreview({ fileUrl }) {
                     <p className="text-xs text-gray-500">{fileSize || "Loading..."} | {fileExtension.toUpperCase()} Document</p>
                 </div>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="mt-3 flex gap-2 w-full">
                 <a
@@ -60,4 +60,47 @@ function DocumentPreview({ fileUrl }) {
     );
 }
 
-export default DocumentPreview;
+export function DocumentPreviewString({ base64String, fileName = "Uploaded Document" }) {
+    if (!base64String) {
+        return <p className="text-gray-500">No file uploaded</p>;
+    }
+
+    // Convert Base64 to Data URL for actions
+    const pdfDataUrl = `${base64String}`;
+
+    return (
+        <div className="mt-2 p-2 bg-gray-100 rounded-md border border-gray-300 shadow-md min-w-full flex flex-col items-center justify-between">
+            {/* File Icon and Details */}
+            <div className="flex items-center gap-2">
+                <AiOutlineFilePdf size={32} className="text-red-500" />
+                <div>
+                    <p className="text-gray-800 font-semibold truncate w-40">{fileName}</p>
+                    <p className="text-xs text-gray-500">PDF Document</p>
+                </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-3 flex gap-2 w-full">
+                <a
+                    href={pdfDataUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+                >
+                    Open
+                </a>
+                <a
+                    href={pdfDataUrl}
+                    download={fileName}
+                    className="flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300"
+                >
+                    Save as...
+                </a>
+            </div>
+        </div>
+    );
+}
+
+
+
+// export default {DocumentPreview,DocumentPreviewString};

@@ -7,7 +7,7 @@ import ChatProvider from './context/ChatProvider';
 import { LoadingProvider } from './context/LoadingContext';
 import App from './App';
 import { ContactsProvider } from './context/ContactsContext';
-
+import { CallProvider } from './context/CallContext';
 
 
 
@@ -19,7 +19,9 @@ createRoot(document.getElementById('root')).render(
         <ChatProvider>
           <LoadingProvider>
             <ContactsProvider>
-              <App />
+              <CallProvider>
+                <App />
+              </CallProvider>
             </ContactsProvider>
           </LoadingProvider>
         </ChatProvider>

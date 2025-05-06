@@ -9,6 +9,7 @@ import { IoSendSharp } from "react-icons/io5";
 import DisplayFile from './DisplayFile';
 
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { UploadFile } from '../../../api/auth';
 
 
 function ShowSelectedFile() {
@@ -17,11 +18,22 @@ function ShowSelectedFile() {
     const { user } = useAuth()
     const [showFileDropDropdown, SetShowFileDropDropdown] = useState(false)
 
+
+    async function SendMessageHandler() {
+        console.log('This is uploadFile ... ');
+        const response = await UploadFile(file)
+        console.log('This is uploadFile Response: ', response);
+        if (response?.success) {
+            console.log('The message is sending');
+
+            sendMessage(message, response?.fileName)
+            setMessage("");
+        }
+    }
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && message.trim() !== "") {
-            console.log('meess ', user?._id);
-            sendMessage(message)
-            setMessage("");
+            SendMessageHandler()
         }
     };
 
@@ -70,8 +82,7 @@ function ShowSelectedFile() {
                         <div className="flex gap-5 w-full bg-[#f3f3f3] p-2 items-center">
                             <Button
                                 onClick={() => {
-                                    sendMessage(message)
-                                    setMessage("");
+                                    SendMessageHandler()
                                 }}
                                 className="text-white bg-green-500 h-[35px] w-[35px] 
                                             rounded text-lg flex ml-auto  items-center justify-center">

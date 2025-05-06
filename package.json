@@ -14,13 +14,18 @@
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@tailwindcss/vite": "^4.0.3",
     "axios": "^1.7.9",
+    "buffer": "^6.0.3",
     "pdfjs-dist": "^3.11.174",
+    "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
     "react-pdf": "^9.2.1",
     "react-router-dom": "^7.1.5",
-    "socket.io-client": "^4.8.1"
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.8.1",
+    "vite-plugin-node-polyfills": "^0.23.0",
+    "wavesurfer.js": "^7.9.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

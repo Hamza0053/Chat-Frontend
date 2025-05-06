@@ -99,6 +99,21 @@ export const ChatList = async () => {
 }
 
 
+export const CallList = async () => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  try {
+    const response = await axios.get(`${API_BASE_URL}/api/calls`, {
+      headers: {
+        'Authorization': `Bearer ${user?.idToken}`
+      },
+    });
+    return response.data
+  } catch (error) {
+    throw error.response ? error.response.data : "Network Error";
+  }
+}
+
+
 export const CreateChat = async (data) => {
   const user = JSON.parse(localStorage.getItem('user'))
   try {
@@ -136,3 +151,31 @@ export const FetchMessages = async (chatId) => {
     throw error.response ? error.response.data : "Network Error";
   }
 }
+
+
+export const UploadFile = async (file) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!file) {
+      throw new Error("No file selected for upload");
+  }
+
+  const formData = new FormData();
+  formData.append("file", file); // Attach file
+
+  try {
+      const response = await axios.post(`${API_BASE_URL}/api/upload/file`, formData, {
+          headers: {
+              "Content-Type": "multipart/form-data",
+              "Authorization": `Bearer ${user?.idToken}`,
+          },
+      });
+
+      console.log("✅ File uploaded successfully:", response.data);
+      return response.data; // Return uploaded file URL
+
+  } catch (error) {
+      console.error("❌ Error uploading file:", error);
+      throw error.response ? error.response.data : "Network Error";
+  }
+};

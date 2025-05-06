@@ -41,14 +41,14 @@ const messages = [
 ];
 
 
-const Chatbox = () => {
+const Chatbox = ({initiateAudioCall}) => {
     const { selectedChat, messages } = useChat();
-
+   
     // console.log('This is ======================== messagess', messages);
 
     return (
         <div className={`${selectedChat ? 'flex' : 'hidden'} sm:flex w-full flex-col max-h-screen relative`}>
-            <ChatUserProfile  />
+            <ChatUserProfile initiateAudioCall={initiateAudioCall} />
 
             <div className=" h-screen">
                 <Image
@@ -56,7 +56,7 @@ const Chatbox = () => {
                     className="bg-[#faf7f4] w-full max-h-full  absolute inset-0 z-0"
                 />
 
-                <div className=" z-20 p-6 absolute top-[73px] bottom-12 left-0 right-0 overflow-y-auto">
+                <div className=" z-10 p-6 absolute top-[73px] bottom-12 left-0 right-0 overflow-y-auto">
                     {
                         messages?.map((msg, index) => (
                             <Message msg={msg} index={index} />
