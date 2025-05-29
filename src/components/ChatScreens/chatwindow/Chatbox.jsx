@@ -41,14 +41,14 @@ const messages = [
 ];
 
 
-const Chatbox = ({initiateAudioCall}) => {
+const   Chatbox = () => {    
     const { selectedChat, messages } = useChat();
    
     // console.log('This is ======================== messagess', messages);
 
     return (
         <div className={`${selectedChat ? 'flex' : 'hidden'} sm:flex w-full flex-col max-h-screen relative`}>
-            <ChatUserProfile initiateAudioCall={initiateAudioCall} />
+            <ChatUserProfile />
 
             <div className=" h-screen">
                 <Image

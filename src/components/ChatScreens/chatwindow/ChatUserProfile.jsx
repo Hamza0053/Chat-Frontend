@@ -5,13 +5,19 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FaPhone } from "react-icons/fa"; // Import phone icon
 import { useChat } from "../../../hooks/useAuth";
 import AudioCall from "../../WebRTC/AudioCall"; // Import the AudioCall component
-// import AudioCall from "../../WebRTC/AudioCall";
+import { useCall } from "../../../hooks/useAuth";
 
 // At the top of your entry file
 window.global = window;
 
-const ChatUserProfile = ({initiateAudioCall}) => {
+const ChatUserProfile = () => {
     const { selectedChat, setSelectedChat } = useChat();
+    const { callUser } = useCall();
+
+    const initiateAudioCall = (member) => {
+        console.log('This is the member: ', member);
+        callUser(member);
+    };
     // const audioCallRef = useRef(); // Create a ref for the AudioCall component
 
     // Memoize member to prevent unnecessary recalculations

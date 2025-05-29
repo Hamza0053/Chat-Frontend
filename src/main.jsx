@@ -8,6 +8,7 @@ import { LoadingProvider } from './context/LoadingContext';
 import App from './App';
 import { ContactsProvider } from './context/ContactsContext';
 import { CallProvider } from './context/CallContext';
+import AudioCall from './components/WebRTC/AudioCall';
 
 
 
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
             <ContactsProvider>
               <CallProvider>
                 <App />
+                <AudioCall />
               </CallProvider>
             </ContactsProvider>
           </LoadingProvider>
